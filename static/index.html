@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dhaaraa Commentary | Live Indic Cricket Audio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Hind+Siliguri:wght@400;600;700&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #070b14;
+      --card-bg: rgba(15, 23, 42, 0.88);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --accent-green: #00e676;
+      --accent-green-glow: rgba(0, 230, 118, 0.35);
+      --accent-gold: #fbbf24;
+      --accent-red: #f43f5e;
+      --accent-blue: #38bdf8;
+      --accent-purple: #a855f7;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-family: 'Outfit', 'Noto Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(0, 230, 118, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 10% 30%, rgba(56, 189, 248, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 90% 70%, rgba(251, 191, 36, 0.06) 0%, transparent 40%),
+        linear-gradient(180deg, #070b14 0%, #030712 100%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: var(--font-family);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 24px 16px;
+    }
+
+    /* Ambient stadium light streak */
+    .stadium-glow {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 260px;
+      background: radial-gradient(ellipse at center, rgba(0, 230, 118, 0.15) 0%, rgba(0, 230, 118, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 840px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .brand-title {
+      font-size: 2.25rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent-green) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(0, 230, 118, 0.15);
+      border: 1px solid rgba(0, 230, 118, 0.4);
+      color: var(--accent-green);
+      -webkit-text-fill-color: var(--accent-green);
+      vertical-align: middle;
+    }
+
+    .brand-tagline {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Main stadium card */
+    .stadium-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      backdrop-filter: blur(16px);
+      box-shadow: 
+        0 20px 45px -10px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+    }
+
+    /* Controls Bar */
+    .controls-bar {
+      padding: 20px 24px;
+      background: rgba(10, 15, 30, 0.6);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 14px;
+      align-items: flex-end;
+    }
+
+    @media (max-width: 640px) {
+      .controls-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .control-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .select-wrapper {
+      position: relative;
+    }
+
+    select {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      color: var(--text-main);
+      padding: 10px 14px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      font-weight: 600;
+      outline: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    select:focus {
+      border-color: var(--accent-green);
+      box-shadow: 0 0 0 2px var(--accent-green-glow);
+    }
+
+    /* Start Button */
+    .btn-match {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #00e676 0%, #059669 100%);
+      color: #032b14;
+      font-weight: 800;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 22px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 230, 118, 0.35);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+      height: 43px;
+    }
+
+    .btn-match:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0, 230, 118, 0.5);
+      filter: brightness(1.08);
+    }
+
+    .btn-match:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+
+    .btn-match:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      filter: grayscale(0.5);
+    }
+
+    .btn-match.pause-state {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #451a03;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+    }
+
+    /* Scoreboard Section */
+    .scoreboard {
+      padding: 24px;
+      background: radial-gradient(circle at 50% 30%, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .match-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .match-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      background: rgba(251, 191, 36, 0.12);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .target-info {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .target-highlight {
+      color: #38bdf8;
+      font-weight: 700;
+    }
+
+    .score-main-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    @media (max-width: 580px) {
+      .score-main-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    .score-primary {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+
+    .runs-wickets {
+      font-size: 3.4rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -1px;
+      color: #ffffff;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .overs-counter {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    .overs-val {
+      color: var(--accent-green);
+      font-weight: 800;
+    }
+
+    .players-box {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .player-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+    }
+
+    .player-role {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .player-name {
+      color: #ffffff;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .on-strike-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 6px var(--accent-green);
+    }
+
+    /* Balls Tracker Timeline */
+    .over-balls-tracker {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tracker-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.8px;
+    }
+
+    .balls-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .ball-pill {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 800;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      transition: all 0.3s ease;
+    }
+
+    .ball-pill.active {
+      transform: scale(1.15);
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+    }
+
+    .ball-pill.dot {
+      background: rgba(148, 163, 184, 0.15);
+      color: #94a3b8;
+      border-color: rgba(148, 163, 184, 0.3);
+    }
+
+    .ball-pill.single {
+      background: rgba(56, 189, 248, 0.18);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .ball-pill.four {
+      background: rgba(0, 230, 118, 0.22);
+      color: #00e676;
+      border-color: rgba(0, 230, 118, 0.5);
+      box-shadow: 0 0 8px rgba(0, 230, 118, 0.3);
+    }
+
+    .ball-pill.six {
+      background: rgba(251, 191, 36, 0.25);
+      color: #fbbf24;
+      border-color: rgba(251, 191, 36, 0.6);
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+    }
+
+    .ball-pill.wicket {
+      background: rgba(244, 63, 94, 0.25);
+      color: #f43f5e;
+      border-color: rgba(244, 63, 94, 0.6);
+      box-shadow: 0 0 10px rgba(244, 63, 94, 0.4);
+    }
+
+    .ball-pill.wide {
+      background: rgba(168, 85, 247, 0.2);
+      color: #c084fc;
+      border-color: rgba(168, 85, 247, 0.5);
+    }
+
+    /* Live Status Bar */
+    .status-bar {
+      padding: 10px 24px;
+      background: rgba(0, 0, 0, 0.35);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 44px;
+    }
+
+    .status-indicator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #64748b;
+    }
+
+    .status-indicator.generating .status-dot {
+      background: var(--accent-gold);
+      box-shadow: 0 0 10px var(--accent-gold);
+      animation: pulse 1s infinite alternate;
+    }
+
+    .status-indicator.generating {
+      color: var(--accent-gold);
+    }
+
+    .status-indicator.speaking .status-dot {
+      background: var(--accent-green);
+      box-shadow: 0 0 10px var(--accent-green);
+      animation: pulse 0.6s infinite alternate;
+    }
+
+    .status-indicator.speaking {
+      color: var(--accent-green);
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.3; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1.15); }
+    }
+
+    /* Audio Equalizer animation */
+    .equalizer {
+      display: none;
+      align-items: center;
+      gap: 3px;
+      height: 14px;
+    }
+
+    .equalizer.active {
+      display: flex;
+    }
+
+    .equalizer-bar {
+      width: 3px;
+      background: var(--accent-green);
+      border-radius: 2px;
+      animation: bounce 0.6s infinite alternate ease-in-out;
+    }
+
+    .equalizer-bar:nth-child(1) { height: 6px; animation-delay: 0.1s; }
+    .equalizer-bar:nth-child(2) { height: 14px; animation-delay: 0.25s; }
+    .equalizer-bar:nth-child(3) { height: 9px; animation-delay: 0.15s; }
+    .equalizer-bar:nth-child(4) { height: 12px; animation-delay: 0.3s; }
+
+    @keyframes bounce {
+      0% { height: 4px; }
+      100% { height: 14px; }
+    }
+
+    /* Commentary Feed */
+    .feed-header {
+      padding: 16px 24px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .feed-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    .feed-count {
+      font-size: 0.75rem;
+      color: #64748b;
+      font-weight: 600;
+    }
+
+    .commentary-feed {
+      padding: 12px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-height: 480px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    }
+
+    .commentary-feed::-webkit-scrollbar {
+      width: 6px;
+    }
+    .commentary-feed::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+    }
+
+    /* Empty feed placeholder */
+    .empty-feed {
+      text-align: center;
+      padding: 48px 20px;
+      color: #64748b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .empty-icon {
+      font-size: 2.2rem;
+      opacity: 0.6;
+    }
+
+    /* Individual Commentary Card */
+    .commentary-card {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.3s ease;
+      animation: slideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes slideIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-16px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .commentary-card.latest {
+      border-color: rgba(0, 230, 118, 0.4);
+      background: rgba(16, 185, 129, 0.06);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .meta-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ball-badge {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .event-badge {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .event-badge.dot { background: rgba(148, 163, 184, 0.2); color: #cbd5e1; }
+    .event-badge.single { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
+    .event-badge.four { background: rgba(0, 230, 118, 0.25); color: #00e676; }
+    .event-badge.six { background: rgba(251, 191, 36, 0.25); color: #fbbf24; }
+    .event-badge.wicket { background: rgba(244, 63, 94, 0.25); color: #f43f5e; }
+    .event-badge.wide { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+
+    .action-summary {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .meta-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .persona-tag {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #94a3b8;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .btn-replay {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 6px;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-replay:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .commentary-text {
+      font-size: 1.05rem;
+      line-height: 1.55;
+      font-weight: 600;
+      color: #f1f5f9;
+      font-family: 'Hind Siliguri', 'Outfit', sans-serif;
+    }
+
+    .commentary-english-trans {
+      font-size: 0.8rem;
+      color: #64748b;
+      font-style: italic;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #475569;
+      margin-top: 10px;
+    }
+
+    footer a {
+      color: #64748b;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="stadium-glow"></div>
+
+  <div class="container">
+    <header>
+      <h1 class="brand-title">
+        ধারা Commentary
+        <span class="brand-badge">Sarvam AI</span>
+      </h1>
+      <p class="brand-tagline">Live cricket match replay with spoken Indic commentary & personas</p>
+    </header>
+
+    <div class="stadium-card">
+      <!-- Controls Bar -->
+      <div class="controls-bar">
+        <div class="control-group">
+          <label class="control-label" for="select-language">
+            <span>🌐</span> Commentary Language
+          </label>
+          <div class="select-wrapper">
+            <select id="select-language">
+              <option value="bn-IN" selected>Bengali (বাংলা)</option>
+              <option value="hi-IN">Hindi (हिन्दी)</option>
+              <option value="ta-IN">Tamil (தமிழ்)</option>
+              <option value="te-IN">Telugu (తెలుగు)</option>
+              <option value="kn-IN">Kannada (ಕನ್ನಡ)</option>
+              <option value="ml-IN">Malayalam (മലയാളം)</option>
+              <option value="mr-IN">Marathi (मराठी)</option>
+              <option value="gu-IN">Gujarati (ગુજરાતી)</option>
+              <option value="pa-IN">Punjabi (ਪੰਜਾਬੀ)</option>
+              <option value="en-IN">English (Indian)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="select-persona">
+            <span>🎙️</span> Commentator Persona
+          </label>
+          <div class="select-wrapper">
+            <select id="select-persona">
+              <option value="Excited fan" selected>Excited fan (High Energy 🔥)</option>
+              <option value="Wise old uncle">Wise old uncle (Nostalgic & Warm ☕)</option>
+              <option value="Calm expert analyst">Calm expert analyst (Tactical 📊)</option>
+              <option value="Sensational TV anchor">Sensational TV anchor (Dramatic ⚡)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <button id="btn-start" class="btn-match">
+            <span id="btn-icon">▶</span>
+            <span id="btn-text">Start Match</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Stadium Scoreboard -->
+      <div class="scoreboard">
+        <div class="match-meta">
+          <div class="match-tag">IND vs PAK • ICC T20 Thriller</div>
+          <div class="target-info">Target: 185 • <span id="target-need" class="target-highlight">33 runs needed off 18 balls</span></div>
+        </div>
+
+        <div class="score-main-grid">
+          <div class="score-primary">
+            <div id="score-display" class="runs-wickets">152/4</div>
+            <div class="overs-counter">
+              Over <span id="over-display" class="overs-val">17.0</span> / 20
+            </div>
+          </div>
+
+          <div class="players-box">
+            <div class="player-row">
+              <span class="player-role">Batter</span>
+              <span id="batter-display" class="player-name">
+                <span class="on-strike-dot"></span> Virat Kohli (58*)
+              </span>
+            </div>
+            <div class="player-row">
+              <span class="player-role">Bowler</span>
+              <span id="bowler-display" class="player-name">Haris Rauf</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Balls Tracker -->
+        <div class="over-balls-tracker">
+          <span class="tracker-label">This Over:</span>
+          <div id="balls-pills" class="balls-pills">
+            <!-- Dynamically populated ball pills -->
+            <span class="ball-pill">-</span>
+            <span class="ball-pill">-</span>
+            <span class="ball-pill">-</span>
+            <span class="ball-pill">-</span>
+            <span class="ball-pill">-</span>
+            <span class="ball-pill">-</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <div id="status-indicator" class="status-indicator">
+          <div class="status-dot"></div>
+          <span id="status-text">Ready to start. Pick a language & persona.</span>
+        </div>
+
+        <div id="equalizer" class="equalizer">
+          <div class="equalizer-bar"></div>
+          <div class="equalizer-bar"></div>
+          <div class="equalizer-bar"></div>
+          <div class="equalizer-bar"></div>
+        </div>
+      </div>
+
+      <!-- Live Commentary Feed -->
+      <div class="feed-header">
+        <div class="feed-title">Live Commentary Feed</div>
+        <div id="feed-count" class="feed-count">0 balls played</div>
+      </div>
+
+      <div id="commentary-feed" class="commentary-feed">
+        <div id="empty-feed" class="empty-feed">
+          <div class="empty-icon">🏏</div>
+          <div>Click <strong>Start Match</strong> to launch the live ball-by-ball broadcast with Sarvam AI voice!</div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      Dhaaraa Commentary &copy; 2026 • Powered by Sarvam AI (sarvam-105b & bulbul:v3)
+    </footer>
+  </div>
+
+  <script>
+    // State
+    let matchBalls = [];
+    let currentBallIndex = 0;
+    let isPlaying = false;
+    let isPaused = false;
+    let isGenerating = false;
+    let currentAudio = null;
+
+    // DOM Elements
+    const selectLanguage = document.getElementById('select-language');
+    const selectPersona = document.getElementById('select-persona');
+    const btnStart = document.getElementById('btn-start');
+    const btnIcon = document.getElementById('btn-icon');
+    const btnText = document.getElementById('btn-text');
+
+    const scoreDisplay = document.getElementById('score-display');
+    const overDisplay = document.getElementById('over-display');
+    const targetNeed = document.getElementById('target-need');
+    const batterDisplay = document.getElementById('batter-display');
+    const bowlerDisplay = document.getElementById('bowler-display');
+    const ballsPillsContainer = document.getElementById('balls-pills');
+
+    const statusIndicator = document.getElementById('status-indicator');
+    const statusText = document.getElementById('status-text');
+    const equalizer = document.getElementById('equalizer');
+
+    const commentaryFeed = document.getElementById('commentary-feed');
+    const emptyFeed = document.getElementById('empty-feed');
+    const feedCount = document.getElementById('feed-count');
+
+    // Load Match Data on Start
+    async function loadMatchData() {
+      try {
+        const resp = await fetch('/api/match');
+        matchBalls = await resp.json();
+      } catch (err) {
+        console.error("Failed to load match data:", err);
+        setStatus("Failed to load match data from backend.", "error");
+      }
+    }
+
+    // Status UI helper
+    function setStatus(text, state = "") {
+      statusText.textContent = text;
+      statusIndicator.className = "status-indicator " + state;
+      if (state === "speaking") {
+        equalizer.classList.add("active");
+      } else {
+        equalizer.classList.remove("active");
+      }
+    }
+
+    // Start / Pause button click
+    btnStart.addEventListener('click', async () => {
+      if (!isPlaying) {
+        // Start match
+        if (matchBalls.length === 0) {
+          await loadMatchData();
+        }
+        if (matchBalls.length === 0) return;
+
+        isPlaying = true;
+        isPaused = false;
+        currentBallIndex = 0;
+        commentaryFeed.innerHTML = '';
+        updateScoreboardReset();
+        btnText.textContent = "Pause Match";
+        btnIcon.textContent = "⏸";
+        btnStart.classList.add('pause-state');
+
+        selectLanguage.disabled = true;
+        selectPersona.disabled = true;
+
+        playNextBall();
+      } else if (isPlaying && !isPaused) {
+        // Pause
+        isPaused = true;
+        if (currentAudio) {
+          currentAudio.pause();
+        }
+        btnText.textContent = "Resume Match";
+        btnIcon.textContent = "▶";
+        btnStart.classList.remove('pause-state');
+        setStatus("Match paused. Click Resume to continue.");
+      } else if (isPlaying && isPaused) {
+        // Resume
+        isPaused = false;
+        btnText.textContent = "Pause Match";
+        btnIcon.textContent = "⏸";
+        btnStart.classList.add('pause-state');
+
+        if (currentAudio && currentAudio.paused && !currentAudio.ended) {
+          setStatus("Playing commentary...", "speaking");
+          currentAudio.play();
+        } else {
+          playNextBall();
+        }
+      }
+    });
+
+    function updateScoreboardReset() {
+      scoreDisplay.textContent = "152/4";
+      overDisplay.textContent = "17.0";
+      targetNeed.textContent = "33 runs needed off 18 balls";
+      batterDisplay.innerHTML = '<span class="on-strike-dot"></span> Virat Kohli';
+      bowlerDisplay.textContent = "Haris Rauf";
+      renderEmptyBallsPills();
+      feedCount.textContent = "0 balls played";
+    }
+
+    function renderEmptyBallsPills() {
+      ballsPillsContainer.innerHTML = '';
+      for (let i = 0; i < 6; i++) {
+        const pill = document.createElement('span');
+        pill.className = 'ball-pill';
+        pill.textContent = '-';
+        ballsPillsContainer.appendChild(pill);
+      }
+    }
+
+    // Play loop for each ball
+    async function playNextBall() {
+      if (!isPlaying || isPaused) return;
+
+      if (currentBallIndex >= matchBalls.length) {
+        // Match Finished
+        isPlaying = false;
+        isPaused = false;
+        btnText.textContent = "Replay Match";
+        btnIcon.textContent = "↺";
+        btnStart.classList.remove('pause-state');
+        selectLanguage.disabled = false;
+        selectPersona.disabled = false;
+        setStatus("Match finished! India wins by 4 wickets in a thrilling finish! 🏆");
+        return;
+      }
+
+      const ball = matchBalls[currentBallIndex];
+      const langCode = selectLanguage.value;
+      const persona = selectPersona.value;
+
+      // Update scoreboard for current ball
+      updateScoreboardForBall(ball, currentBallIndex);
+
+      // Generating status
+      setStatus(`Generating commentary for Over ${ball.over}.${ball.ball} (${ball.bowler} to ${ball.batter})...`, "generating");
+      isGenerating = true;
+
+      try {
+        const resp = await fetch('/api/commentate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            ball: ball,
+            language_code: langCode,
+            persona: persona
+          })
+        });
+
+        const data = await resp.json();
+        isGenerating = false;
+
+        if (isPaused) {
+          // If user paused while generating, wait
+          return;
+        }
+
+        const commentaryText = data.text || `Over ${ball.over}.${ball.ball}: ${ball.event}!`;
+        const audioBase64 = data.audio_base64;
+
+        // Add to feed
+        addCommentaryCard(ball, commentaryText, audioBase64, persona);
+        feedCount.textContent = `${currentBallIndex + 1} of ${matchBalls.length} balls`;
+
+        // Play audio if available, wait for completion
+        if (audioBase64) {
+          setStatus(`🎙️ Speaking commentary in ${selectLanguage.options[selectLanguage.selectedIndex].text}...`, "speaking");
+          await playAudioBase64(audioBase64);
+        } else {
+          // Fallback reading pause if audio not present
+          setStatus(`Commentary: ${commentaryText}`);
+          await sleep(3500);
+        }
+
+        // Proceed to next ball
+        currentBallIndex++;
+        if (isPlaying && !isPaused) {
+          await sleep(1000); // 1-second pause between balls
+          playNextBall();
+        }
+
+      } catch (err) {
+        console.error("Error during commentary generation:", err);
+        isGenerating = false;
+        setStatus("Error generating commentary. Continuing...", "error");
+        
+        // Show fallback card and continue
+        addCommentaryCard(ball, `${ball.over}.${ball.ball}: ${ball.bowler} to ${ball.batter}, ${ball.event}.`, null, persona);
+        currentBallIndex++;
+        await sleep(2500);
+        if (isPlaying && !isPaused) {
+          playNextBall();
+        }
+      }
+    }
+
+    // Play base64 WAV audio returning a promise that resolves when audio finishes
+    function playAudioBase64(b64) {
+      return new Promise((resolve) => {
+        try {
+          if (currentAudio) {
+            currentAudio.pause();
+            currentAudio = null;
+          }
+
+          const audio = new Audio("data:audio/wav;base64," + b64);
+          currentAudio = audio;
+
+          audio.onended = () => {
+            currentAudio = null;
+            resolve();
+          };
+
+          audio.onerror = (e) => {
+            console.warn("Audio playback error:", e);
+            currentAudio = null;
+            resolve();
+          };
+
+          audio.play().catch(err => {
+            console.warn("Audio autoplay blocked or failed:", err);
+            // If autoplay is blocked by browser policy, still resolve after brief delay
+            resolve();
+          });
+        } catch (e) {
+          console.error("Audio init error:", e);
+          resolve();
+        }
+      });
+    }
+
+    // Helper sleep
+    function sleep(ms) {
+      return new Promise(r => setTimeout(r, ms));
+    }
+
+    // Scoreboard update per ball
+    function updateScoreboardForBall(ball, index) {
+      scoreDisplay.textContent = `${ball.score_so_far}/${ball.wickets}`;
+      overDisplay.textContent = `${ball.over - 1}.${ball.ball}`;
+
+      const runsNeeded = Math.max(0, 185 - ball.score_so_far);
+      const ballsLeft = Math.max(0, 18 - (index + 1));
+      if (runsNeeded === 0) {
+        targetNeed.textContent = "TARGET ACHIEVED! Victory!";
+      } else {
+        targetNeed.textContent = `${runsNeeded} runs needed off ${ballsLeft} balls`;
+      }
+
+      batterDisplay.innerHTML = `<span class="on-strike-dot"></span> ${ball.batter}`;
+      bowlerDisplay.textContent = ball.bowler;
+
+      // Update Over Pills
+      updateOverPills(ball.ball, ball.event);
+    }
+
+    function updateOverPills(ballNumber, event) {
+      // ballNumber 1..6
+      const pills = ballsPillsContainer.querySelectorAll('.ball-pill');
+      if (ballNumber === 1) {
+        renderEmptyBallsPills();
+      }
+
+      const pillIndex = ballNumber - 1;
+      if (pills[pillIndex]) {
+        pills[pillIndex].className = `ball-pill active ${event}`;
+        let text = event.charAt(0).toUpperCase();
+        if (event === "dot") text = "0";
+        if (event === "single") text = "1";
+        if (event === "four") text = "4";
+        if (event === "six") text = "6";
+        if (event === "wicket") text = "W";
+        if (event === "wide") text = "Wd";
+        pills[pillIndex].textContent = text;
+      }
+    }
+
+    // Add commentary card to the top of feed
+    function addCommentaryCard(ball, text, audioB64, persona) {
+      if (emptyFeed) {
+        emptyFeed.remove();
+      }
+
+      // Remove latest highlight from other cards
+      const existingLatest = commentaryFeed.querySelectorAll('.commentary-card.latest');
+      existingLatest.forEach(el => el.classList.remove('latest'));
+
+      const card = document.createElement('div');
+      card.className = 'commentary-card latest';
+
+      const eventClass = ball.event;
+      let eventLabel = ball.event.toUpperCase();
+      if (ball.event === "four") eventLabel = "4 - FOUR!";
+      if (ball.event === "six") eventLabel = "6 - SIX!";
+      if (ball.event === "wicket") eventLabel = "W - WICKET!";
+
+      let replayBtnHtml = '';
+      if (audioB64) {
+        replayBtnHtml = `<button class="btn-replay" onclick="replayAudio('${encodeURIComponent(audioB64)}')">🔊 Listen</button>`;
+      }
+
+      card.innerHTML = `
+        <div class="card-meta">
+          <div class="meta-left">
+            <span class="ball-badge">${ball.over}.${ball.ball}</span>
+            <span class="event-badge ${eventClass}">${eventLabel}</span>
+            <span class="action-summary">${ball.bowler} to ${ball.batter}</span>
+          </div>
+          <div class="meta-right">
+            <span class="persona-tag">${persona}</span>
+            ${replayBtnHtml}
+          </div>
+        </div>
+        <div class="commentary-text">${escapeHtml(text)}</div>
+        <div class="commentary-english-trans">${escapeHtml(ball.description || '')}</div>
+      `;
+
+      // Insert at the top
+      commentaryFeed.insertBefore(card, commentaryFeed.firstChild);
+    }
+
+    // Window replay handler for audio replay button
+    window.replayAudio = function(encodedB64) {
+      try {
+        const b64 = decodeURIComponent(encodedB64);
+        const a = new Audio("data:audio/wav;base64," + b64);
+        a.play();
+      } catch (e) {
+        console.error("Replay failed:", e);
+      }
+    };
+
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+    }
+
+    // Preload match data
+    loadMatchData();
+  </script>
+</body>
+</html>

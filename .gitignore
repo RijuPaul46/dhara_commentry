@@ -1,0 +1,23 @@
+# Secrets - Never commit API keys!
+.env
+*.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Generated audio test outputs
+*.wav
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
